@@ -10,7 +10,9 @@ CLASS ltcl_numeral DEFINITION FINAL FOR TESTING
       latin_5 FOR TESTING RAISING cx_static_check,
       latin_6to8 FOR TESTING RAISING cx_static_check,
       latin_9 FOR TESTING RAISING cx_static_check,
-      latin_1to3 FOR TESTING RAISING cx_static_check.
+      latin_1to3 FOR TESTING RAISING cx_static_check,
+      latin_10 FOR TESTING RAISING cx_static_check,
+    latin_11to13 FOR TESTING RAISING cx_static_check.
     METHODS setup.
     METHODS latin_x
       IMPORTING VALUE(ln) TYPE i
@@ -39,7 +41,14 @@ CLASS ltcl_numeral IMPLEMENTATION.
   METHOD latin_9.
     latin_x( ln = 9 rn = |IX| ).
   ENDMETHOD.
-
+  METHOD latin_10.
+    latin_x( ln = 10 rn = |X| ).
+  ENDMETHOD.
+  METHOD latin_11to13.
+    latin_x( ln = 11 rn = |XI| ).
+    latin_x( ln = 12 rn = |XII| ).
+    latin_x( ln = 13 rn = |XIII| ).
+  ENDMETHOD.
 
   METHOD latin_x.
     cl_abap_unit_assert=>assert_equals( msg = |{ ln } = { rn }| exp = rn act = cut->to_roman( ln ) ).
