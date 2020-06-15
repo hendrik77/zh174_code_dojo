@@ -12,7 +12,14 @@ CLASS ltcl_numeral DEFINITION FINAL FOR TESTING
       latin_9 FOR TESTING RAISING cx_static_check,
       latin_1to3 FOR TESTING RAISING cx_static_check,
       latin_10 FOR TESTING RAISING cx_static_check,
-    latin_11to13 FOR TESTING RAISING cx_static_check.
+      latin_11 FOR TESTING RAISING cx_static_check,
+      latin_14 FOR TESTING RAISING cx_static_check,
+      latin_12 FOR TESTING RAISING cx_static_check,
+      latin_13 FOR TESTING RAISING cx_static_check,
+    latin_0 FOR TESTING RAISING cx_static_check,
+    latin_26 FOR TESTING RAISING cx_static_check,
+    latin_16 FOR TESTING RAISING cx_static_check,
+    latin_20 FOR TESTING RAISING cx_static_check.
     METHODS setup.
     METHODS latin_x
       IMPORTING VALUE(ln) TYPE i
@@ -44,11 +51,31 @@ CLASS ltcl_numeral IMPLEMENTATION.
   METHOD latin_10.
     latin_x( ln = 10 rn = |X| ).
   ENDMETHOD.
-  METHOD latin_11to13.
+  METHOD latin_11.
     latin_x( ln = 11 rn = |XI| ).
+  ENDMETHOD.
+  METHOD latin_12.
     latin_x( ln = 12 rn = |XII| ).
+  ENDMETHOD.
+  METHOD latin_13.
     latin_x( ln = 13 rn = |XIII| ).
   ENDMETHOD.
+  METHOD latin_14.
+    latin_x( ln = 14 rn = |XIV| ).
+  ENDMETHOD.
+  METHOD latin_0.
+    latin_x( ln = 0 rn = || ).
+  ENDMETHOD.
+  METHOD latin_16.
+    latin_x( ln = 16 rn = |XVI| ).
+  ENDMETHOD.
+  METHOD latin_20.
+    latin_x( ln = 20 rn = |XX| ).
+  ENDMETHOD.
+  METHOD latin_26.
+    latin_x( ln = 26 rn = |XXVI| ).
+  ENDMETHOD.
+
 
   METHOD latin_x.
     cl_abap_unit_assert=>assert_equals( msg = |{ ln } = { rn }| exp = rn act = cut->to_roman( ln ) ).
