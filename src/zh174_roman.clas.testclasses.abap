@@ -19,7 +19,8 @@ CLASS ltcl_numeral DEFINITION FINAL FOR TESTING
     latin_0 FOR TESTING RAISING cx_static_check,
     latin_26 FOR TESTING RAISING cx_static_check,
     latin_16 FOR TESTING RAISING cx_static_check,
-    latin_20 FOR TESTING RAISING cx_static_check.
+    latin_20 FOR TESTING RAISING cx_static_check,
+    latin_30 FOR TESTING RAISING cx_static_check.
     METHODS setup.
     METHODS latin_x
       IMPORTING VALUE(ln) TYPE i
@@ -75,7 +76,9 @@ CLASS ltcl_numeral IMPLEMENTATION.
   METHOD latin_26.
     latin_x( ln = 26 rn = |XXVI| ).
   ENDMETHOD.
-
+  METHOD latin_30.
+    latin_x( ln = 30 rn = |XXX| ).
+  ENDMETHOD.
 
   METHOD latin_x.
     cl_abap_unit_assert=>assert_equals( msg = |{ ln } = { rn }| exp = rn act = cut->to_roman( ln ) ).
