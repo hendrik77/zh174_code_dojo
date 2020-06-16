@@ -23,10 +23,16 @@ CLASS ltcl_numeral DEFINITION FINAL FOR TESTING
       latin_30 FOR TESTING RAISING cx_static_check,
       latin_50 FOR TESTING RAISING cx_static_check,
       latin_100 FOR TESTING RAISING cx_static_check,
-*      latin_99 FOR TESTING RAISING cx_static_check,
+      latin_99 FOR TESTING RAISING cx_static_check,
       latin_369 FOR TESTING RAISING cx_static_check,
-*      latin_90 FOR TESTING RAISING cx_static_check,
-    latin_40 FOR TESTING RAISING cx_static_check.
+      latin_90 FOR TESTING RAISING cx_static_check,
+    latin_40 FOR TESTING RAISING cx_static_check,
+    latin_41 FOR TESTING RAISING cx_static_check,
+    latin_19 FOR TESTING RAISING cx_static_check,
+    latin_39 FOR TESTING RAISING cx_static_check,
+    latin_73 FOR TESTING RAISING cx_static_check,
+    latin_500 FOR TESTING RAISING cx_static_check,
+    latin_491 FOR TESTING RAISING cx_static_check.
     METHODS setup.
     METHODS latin_x
       IMPORTING VALUE(ln) TYPE i
@@ -76,6 +82,9 @@ CLASS ltcl_numeral IMPLEMENTATION.
   METHOD latin_16.
     latin_x( ln = 16 rn = |XVI| ).
   ENDMETHOD.
+  METHOD latin_19.
+    latin_x( ln = 19 rn = |XIX| ).
+  ENDMETHOD.
   METHOD latin_20.
     latin_x( ln = 20 rn = |XX| ).
   ENDMETHOD.
@@ -94,11 +103,29 @@ CLASS ltcl_numeral IMPLEMENTATION.
   METHOD latin_40.
     latin_x( ln = 40 rn = |XL| ).
   ENDMETHOD.
-*  METHOD latin_99.
-*    latin_x( ln = 99 rn = |XCIX| ).
-*  ENDMETHOD.
+  METHOD latin_39.
+    latin_x( ln = 39 rn = |XXXIX| ).
+  ENDMETHOD.
+  METHOD latin_41.
+    latin_x( ln = 41 rn = |XLI| ).
+  ENDMETHOD.
+  METHOD latin_73.
+    latin_x( ln = 73 rn = |LXXIII| ).
+  ENDMETHOD.
+  METHOD latin_90.
+    latin_x( ln = 90 rn = |XC| ).
+  ENDMETHOD.
+  METHOD latin_99.
+    latin_x( ln = 99 rn = |XCIX| ).
+  ENDMETHOD.
   METHOD latin_369.
     latin_x( ln = 369 rn = |CCCLXIX| ).
+  ENDMETHOD.
+  METHOD latin_491.
+    latin_x( ln = 491 rn = |CDXCI| ).
+  ENDMETHOD.
+  METHOD latin_500.
+    latin_x( ln = 500 rn = |D| ).
   ENDMETHOD.
 
   METHOD latin_x.
