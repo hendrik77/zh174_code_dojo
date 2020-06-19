@@ -31,7 +31,7 @@ CLASS zh174_fizz_buzz IMPLEMENTATION.
 
 
   METHOD input.
-
+    output = |Fizz|.
   ENDMETHOD.
 
 ENDCLASS.
