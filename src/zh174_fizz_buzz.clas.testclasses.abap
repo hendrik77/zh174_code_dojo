@@ -7,8 +7,9 @@ CLASS ltcl_fizz_buzz DEFINITION FINAL FOR TESTING
     METHODS:
       input_3_fizz FOR TESTING RAISING cx_static_check,
       input_4 FOR TESTING RAISING cx_static_check,
-    input_6_fizz FOR TESTING RAISING cx_static_check,
-    input_5_buzz FOR TESTING RAISING cx_static_check.
+      input_6_fizz FOR TESTING RAISING cx_static_check,
+      input_5_buzz FOR TESTING RAISING cx_static_check,
+      input_10_buzz FOR TESTING RAISING cx_static_check.
     METHODS setup.
 ENDCLASS.
 
@@ -32,6 +33,10 @@ CLASS ltcl_fizz_buzz IMPLEMENTATION.
 
   METHOD input_5_buzz.
     cl_abap_unit_assert=>assert_equals( msg = '5 -> Buzz' exp = |Buzz| act = fizz_buzz->input( 5 ) ).
+  ENDMETHOD.
+
+  METHOD input_10_buzz.
+    cl_abap_unit_assert=>assert_equals( msg = '10 -> Buzz' exp = |Buzz| act = fizz_buzz->input( 10 ) ).
   ENDMETHOD.
 
 ENDCLASS.
