@@ -31,9 +31,9 @@ CLASS zh174_fizz_buzz IMPLEMENTATION.
 
 
   METHOD input.
-    output = SWITCH #( input
-                       WHEN 3 THEN |Fizz|
-                       WHEN 4 THEN |4| ).
+    output = COND #( WHEN input MOD 3 = 0 THEN |Fizz|
+                     ELSE input ) .
+    output = condense( output ). "needed due to added space during conversion '4 ' -> '4'
   ENDMETHOD.
 
 ENDCLASS.
