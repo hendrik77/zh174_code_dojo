@@ -10,7 +10,8 @@ CLASS ltcl_fizz_buzz DEFINITION FINAL FOR TESTING
       input_6_fizz FOR TESTING RAISING cx_static_check,
       input_5_buzz FOR TESTING RAISING cx_static_check,
       input_10_buzz FOR TESTING RAISING cx_static_check,
-    input_15_fizzbuzz FOR TESTING RAISING cx_static_check.
+      input_15_fizzbuzz FOR TESTING RAISING cx_static_check,
+      fizz_buzz_20_lines FOR TESTING RAISING cx_static_check.
     METHODS setup.
 ENDCLASS.
 
@@ -42,6 +43,13 @@ CLASS ltcl_fizz_buzz IMPLEMENTATION.
 
   METHOD input_15_fizzbuzz.
     cl_abap_unit_assert=>assert_equals( msg = '15 -> FizzBuzz' exp = |FizzBuzz| act = fizz_buzz->input( 15 ) ).
+  ENDMETHOD.
+
+  METHOD fizz_buzz_20_lines.
+    DATA(text) = fizz_buzz->fizz_buzz( count = 20 ).
+    SPLIT text AT cl_abap_char_utilities=>newline INTO TABLE DATA(text_table).
+    cl_abap_unit_assert=>assert_equals( msg = 'lines = 20' exp = 20 act = lines( text_table ) ).
+    cl_abap_unit_assert=>assert_equals( msg = '15 = FizzBuzz' exp = |FizzBuzz| act = text_table[ 15 ] ).
   ENDMETHOD.
 
 ENDCLASS.
