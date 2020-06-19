@@ -1,18 +1,27 @@
-class ltcl_fizz_buzz definition final for testing
-  duration short
-  risk level harmless.
+CLASS ltcl_fizz_buzz DEFINITION FINAL FOR TESTING
+  DURATION SHORT
+  RISK LEVEL HARMLESS.
 
-  private section.
-    methods:
-      input_3_fizz for testing raising cx_static_check.
-endclass.
+  PRIVATE SECTION.
+    DATA: fizz_buzz TYPE REF TO zh174_fizz_buzz.
+    METHODS:
+      input_3_fizz FOR TESTING RAISING cx_static_check,
+      input_4 FOR TESTING RAISING cx_static_check.
+    METHODS setup.
+ENDCLASS.
 
 
-class ltcl_fizz_buzz implementation.
+CLASS ltcl_fizz_buzz IMPLEMENTATION.
+  METHOD setup.
+    fizz_buzz = NEW zh174_fizz_buzz( ).
+  ENDMETHOD.
 
-  method input_3_fizz.
-    data(Fizz_buzz) = new zh174_fizz_buzz( ).
+  METHOD input_3_fizz.
     cl_abap_unit_assert=>assert_equals( msg = '3 -> Fizz' exp = |Fizz| act = fizz_buzz->input( 3 ) ).
-  endmethod.
+  ENDMETHOD.
 
-endclass.
+  METHOD input_4.
+    cl_abap_unit_assert=>assert_equals( msg = '4 -> 4' exp = |4| act = fizz_buzz->input( 4 ) ).
+  ENDMETHOD.
+
+ENDCLASS.

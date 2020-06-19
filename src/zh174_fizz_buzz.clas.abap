@@ -11,9 +11,9 @@ CLASS zh174_fizz_buzz DEFINITION
         VALUE(text) TYPE string.
     METHODS input
       IMPORTING
-        value(input)  TYPE i
+        VALUE(input)  TYPE i
       RETURNING
-        value(output) TYPE string.
+        VALUE(output) TYPE string.
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
@@ -31,7 +31,9 @@ CLASS zh174_fizz_buzz IMPLEMENTATION.
 
 
   METHOD input.
-    output = |Fizz|.
+    output = SWITCH #( input
+                       WHEN 3 THEN |Fizz|
+                       WHEN 4 THEN |4| ).
   ENDMETHOD.
 
 ENDCLASS.
