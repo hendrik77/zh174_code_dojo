@@ -32,6 +32,7 @@ CLASS zh174_fizz_buzz IMPLEMENTATION.
 
   METHOD input.
     output = COND #( WHEN input MOD 3 = 0 THEN |Fizz|
+                     WHEN input = 5 THEN |Buzz|
                      ELSE input ) .
     output = condense( output ). "needed due to added space during conversion '4 ' -> '4'
   ENDMETHOD.
