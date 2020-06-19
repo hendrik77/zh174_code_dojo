@@ -27,11 +27,11 @@ CLASS zh174_roman IMPLEMENTATION.
                            WHEN latin_number >= 90  THEN |XC| && to_roman( latin_number - 90 )
                            WHEN latin_number >= 50  THEN |L|  && to_roman( latin_number - 50 )
                            WHEN latin_number >= 40  THEN |XL| && to_roman( latin_number - 40 )
-                           WHEN latin_number >= 10  THEN |X|  && to_roman( latin_number - 10 )
-                           WHEN latin_number >= 9   THEN |IX| && to_roman( latin_number - 9 )
-                           WHEN latin_number >= 5   THEN |V|  && to_roman( latin_number - 5 )
-                           WHEN latin_number >= 4   THEN |IV| && to_roman( latin_number - 4 )
-                           WHEN latin_number >  0   THEN |I|  && to_roman( latin_number - 1 )
+                           WHEN latin_number > 9    THEN |X|  && to_roman( latin_number - 10 )
+                           WHEN latin_number = 9    THEN |IX| && to_roman( latin_number - 9 )
+                           WHEN latin_number > 4    THEN |V|  && to_roman( latin_number - 5 )
+                           WHEN latin_number = 4    THEN |IV| && to_roman( latin_number - 4 )
+                           WHEN latin_number > 0    THEN |I|  && to_roman( latin_number - 1 )
                            else || ).
 
 

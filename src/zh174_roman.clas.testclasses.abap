@@ -26,13 +26,13 @@ CLASS ltcl_numeral DEFINITION FINAL FOR TESTING
       latin_99 FOR TESTING RAISING cx_static_check,
       latin_369 FOR TESTING RAISING cx_static_check,
       latin_90 FOR TESTING RAISING cx_static_check,
-    latin_40 FOR TESTING RAISING cx_static_check,
-    latin_41 FOR TESTING RAISING cx_static_check,
-    latin_19 FOR TESTING RAISING cx_static_check,
-    latin_39 FOR TESTING RAISING cx_static_check,
-    latin_73 FOR TESTING RAISING cx_static_check,
-    latin_500 FOR TESTING RAISING cx_static_check,
-    latin_491 FOR TESTING RAISING cx_static_check.
+      latin_40 FOR TESTING RAISING cx_static_check,
+      latin_41 FOR TESTING RAISING cx_static_check,
+      latin_19 FOR TESTING RAISING cx_static_check,
+      latin_39 FOR TESTING RAISING cx_static_check,
+      latin_73 FOR TESTING RAISING cx_static_check,
+      latin_500 FOR TESTING RAISING cx_static_check,
+      latin_491 FOR TESTING RAISING cx_static_check.
     METHODS setup.
     METHODS latin_x
       IMPORTING VALUE(ln) TYPE i
@@ -42,16 +42,20 @@ ENDCLASS.
 
 CLASS ltcl_numeral IMPLEMENTATION.
 
+  METHOD setup.
+    cut = NEW  zh174_roman( ).
+  ENDMETHOD.
+
   METHOD latin_1to3.
     latin_x( ln = 1 rn = |I| ).
     latin_x( ln = 2 rn = |II| ).
     latin_x( ln = 3 rn = |III| ).
   ENDMETHOD.
   METHOD latin_4.
-    cl_abap_unit_assert=>assert_equals( msg = '4 = IV' exp = 'IV' act = cut->to_roman( 4 ) ).
+    latin_x( ln = 4 rn = |IV| ).
   ENDMETHOD.
   METHOD latin_5.
-    cl_abap_unit_assert=>assert_equals( msg = '5 = V' exp = 'V' act = cut->to_roman( 5 ) ).
+    latin_x( ln = 5 rn = |V| ).
   ENDMETHOD.
   METHOD latin_6to8.
     latin_x( ln = 6 rn = |VI| ).
@@ -131,11 +135,5 @@ CLASS ltcl_numeral IMPLEMENTATION.
   METHOD latin_x.
     cl_abap_unit_assert=>assert_equals( msg = |{ ln } = { rn }| exp = rn act = cut->to_roman( ln ) ).
   ENDMETHOD.
-
-  METHOD setup.
-    cut = NEW  zh174_roman( ).
-  ENDMETHOD.
-
-
 
 ENDCLASS.
