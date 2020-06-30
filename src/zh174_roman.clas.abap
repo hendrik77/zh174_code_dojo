@@ -9,32 +9,44 @@ CLASS zh174_roman DEFINITION
         VALUE(latin_number) TYPE i
       RETURNING
         VALUE(roman_number) TYPE string.
+    METHODS constructor.
   PROTECTED SECTION.
   PRIVATE SECTION.
+    TYPES: BEGIN OF lookup_type,
+             latin TYPE i,
+             roman TYPE string,
+           END OF lookup_type,
+           lookup_table_type TYPE STANDARD TABLE OF lookup_type WITH KEY latin.
+    DATA: lookup_table TYPE zh174_roman=>lookup_table_type.
 ENDCLASS.
 
 
 
 CLASS zh174_roman IMPLEMENTATION.
 
-
-
   METHOD to_roman.
 
-    roman_number = COND #( WHEN latin_number >= 1000  THEN |M|  && to_roman( latin_number - 1000 )
-                           WHEN latin_number >= 500   THEN |D|  && to_roman( latin_number - 500 )
-                           WHEN latin_number >= 400   THEN |CD| && to_roman( latin_number - 400 )
-                           WHEN latin_number >= 100   THEN |C|  && to_roman( latin_number - 100 )
-                           WHEN latin_number >= 90    THEN |XC| && to_roman( latin_number - 90 )
-                           WHEN latin_number >= 50    THEN |L|  && to_roman( latin_number - 50 )
-                           WHEN latin_number >= 40    THEN |XL| && to_roman( latin_number - 40 )
-                           WHEN latin_number >= 10    THEN |X|  && to_roman( latin_number - 10 )
-                           WHEN latin_number >= 9     THEN |IX| && to_roman( latin_number - 9 )
-                           WHEN latin_number >= 5     THEN |V|  && to_roman( latin_number - 5 )
-                           WHEN latin_number >= 4     THEN |IV| && to_roman( latin_number - 4 )
-                           WHEN latin_number >= 1     THEN |I|  && to_roman( latin_number - 1 )
-                           ELSE || ).
+    LOOP AT lookup_table ASSIGNING FIELD-SYMBOL(<lookup>).
+      IF latin_number >= <lookup>-latin.
+        roman_number = <lookup>-roman && to_roman( latin_number - <lookup>-latin ).
+        RETURN.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
 
+  METHOD constructor.
+    lookup_table = VALUE lookup_table_type( ( latin = 1000 roman = |M|  )
+                                            ( latin = 500  roman = |D|  )
+                                            ( latin = 400  roman = |CD| )
+                                            ( latin = 100  roman = |C|  )
+                                            ( latin = 90   roman = |XC| )
+                                            ( latin = 50   roman = |L|  )
+                                            ( latin = 40   roman = |XL| )
+                                            ( latin = 10   roman = |X|  )
+                                            ( latin = 9    roman = |IX| )
+                                            ( latin = 5    roman = |V|  )
+                                            ( latin = 4    roman = |IV| )
+                                            ( latin = 1    roman = |I|  ) ).
   ENDMETHOD.
 
 ENDCLASS.
