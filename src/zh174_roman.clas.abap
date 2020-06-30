@@ -10,6 +10,11 @@ CLASS zh174_roman DEFINITION
       RETURNING
         VALUE(roman_number) TYPE string.
     METHODS constructor.
+    METHODS to_latin
+      IMPORTING
+        VALUE(roman_number) TYPE string
+      RETURNING
+        VALUE(latin_number) TYPE i.
   PROTECTED SECTION.
   PRIVATE SECTION.
     TYPES: BEGIN OF lookup_type,
@@ -32,6 +37,7 @@ CLASS zh174_roman IMPLEMENTATION.
         RETURN.
       ENDIF.
     ENDLOOP.
+
   ENDMETHOD.
 
   METHOD constructor.
@@ -49,4 +55,24 @@ CLASS zh174_roman IMPLEMENTATION.
                                             ( latin = 1    roman = |I|  ) ).
   ENDMETHOD.
 
+
+  METHOD to_latin.
+
+    latin_number = COND #(
+      WHEN find( val = roman_number sub = 'M' ) = 0 THEN 1000 + to_latin( substring( val = roman_number off = 1 ) )
+      WHEN find( val = roman_number sub = 'M' ) > 0 THEN 900  + to_latin( substring( val = roman_number off = 2 ) )
+      WHEN find( val = roman_number sub = 'D' ) = 0 THEN 500  + to_latin( substring( val = roman_number off = 1 ) )
+      WHEN find( val = roman_number sub = 'D' ) > 0 THEN 400  + to_latin( substring( val = roman_number off = 2 ) )
+      WHEN find( val = roman_number sub = 'C' ) = 0 THEN 100  + to_latin( substring( val = roman_number off = 1 ) )
+      WHEN find( val = roman_number sub = 'C' ) > 0 THEN 90   + to_latin( substring( val = roman_number off = 2 ) )
+      WHEN find( val = roman_number sub = 'L' ) > 0 THEN 40   + to_latin( substring( val = roman_number off = 2 ) )
+      WHEN find( val = roman_number sub = 'L' ) = 0 THEN 50   + to_latin( substring( val = roman_number off = 1 ) )
+      WHEN find( val = roman_number sub = 'X' ) = 0 THEN 10   + to_latin( substring( val = roman_number off = 1 ) )
+      WHEN find( val = roman_number sub = 'X' ) > 0 THEN 9
+      WHEN find( val = roman_number sub = 'V' ) = 0 THEN 5    + to_latin( substring( val = roman_number off = 1 ) )
+      WHEN find( val = roman_number sub = 'V' ) > 0 THEN 4
+      WHEN find( val = roman_number sub = 'I' ) = 0 THEN 1    + to_latin( substring( val = roman_number off = 1 ) ) ).
+  ENDMETHOD.
+
 ENDCLASS.
+
