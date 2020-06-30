@@ -32,7 +32,9 @@ CLASS ltcl_numeral DEFINITION FINAL FOR TESTING
       latin_39 FOR TESTING RAISING cx_static_check,
       latin_73 FOR TESTING RAISING cx_static_check,
       latin_500 FOR TESTING RAISING cx_static_check,
-      latin_491 FOR TESTING RAISING cx_static_check.
+      latin_491 FOR TESTING RAISING cx_static_check,
+    latin_1000 FOR TESTING RAISING cx_static_check.
+
     METHODS setup.
     METHODS latin_x
       IMPORTING VALUE(ln) TYPE i
@@ -130,6 +132,9 @@ CLASS ltcl_numeral IMPLEMENTATION.
   ENDMETHOD.
   METHOD latin_500.
     latin_x( ln = 500 rn = |D| ).
+  ENDMETHOD.
+  METHOD latin_1000.
+    latin_x( ln = 1000 rn = |M| ).
   ENDMETHOD.
 
   METHOD latin_x.
