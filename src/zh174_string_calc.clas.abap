@@ -6,9 +6,10 @@ CLASS zh174_string_calc DEFINITION
   PUBLIC SECTION.
     METHODS add
       IMPORTING
-        VALUE(number) TYPE string
+                VALUE(number) TYPE string
       RETURNING
-        VALUE(result) TYPE i.
+                VALUE(result) TYPE i
+      RAISING   zcx_h174_str_calc.
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
@@ -18,8 +19,23 @@ ENDCLASS.
 CLASS zh174_string_calc IMPLEMENTATION.
 
   METHOD add.
-    SPLIT number AT ',' INTO TABLE DATA(number_tab).
-    result = REDUCE #( INIT r = 0 FOR wa IN number_tab NEXT
+    IF strlen( number ) > 0 and
+     ( substring( off = strlen( number ) - 1 len = 1 val = number ) = |,| OR
+       substring( off = strlen( number ) - 1 len = 1 val = number ) = cl_abap_char_utilities=>newline ).
+      RAISE EXCEPTION type zcx_h174_str_calc MESSAGE id 'ZH174_STR_CALC' NUMBER '001'." WITH 'Number expected but EOF found.'.
+    ENDIF.
+    DATA result_tab TYPE STANDARD TABLE OF string.
+    SPLIT number AT cl_abap_char_utilities=>newline INTO TABLE DATA(number_tab).
+    LOOP AT number_tab ASSIGNING FIELD-SYMBOL(<num>).
+      IF  <num> CS |,|.
+        SPLIT <num> AT ',' INTO TABLE DATA(comma_tab).
+        APPEND LINES OF comma_tab TO result_tab.
+      ELSE.
+        APPEND <num> TO result_tab.
+      ENDIF.
+    ENDLOOP.
+
+    result = REDUCE #( INIT r = 0 FOR wa IN result_tab NEXT
                        r = r + wa ).
   ENDMETHOD.
 
