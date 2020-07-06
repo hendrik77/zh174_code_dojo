@@ -19,11 +19,14 @@ ENDCLASS.
 CLASS zh174_string_calc IMPLEMENTATION.
 
   METHOD add.
-    IF strlen( number ) > 0 and
+    "Missing number in last position
+    IF strlen( number ) > 0 AND
      ( substring( off = strlen( number ) - 1 len = 1 val = number ) = |,| OR
        substring( off = strlen( number ) - 1 len = 1 val = number ) = cl_abap_char_utilities=>newline ).
-      RAISE EXCEPTION type zcx_h174_str_calc MESSAGE id 'ZH174_STR_CALC' NUMBER '001'." WITH 'Number expected but EOF found.'.
+      RAISE EXCEPTION TYPE zcx_h174_str_calc MESSAGE ID 'ZH174_STR_CALC' NUMBER '001'." WITH 'Number expected but EOF found.'.
     ENDIF.
+
+    "Newline as separator
     DATA result_tab TYPE STANDARD TABLE OF string.
     SPLIT number AT cl_abap_char_utilities=>newline INTO TABLE DATA(number_tab).
     LOOP AT number_tab ASSIGNING FIELD-SYMBOL(<num>).
@@ -35,6 +38,7 @@ CLASS zh174_string_calc IMPLEMENTATION.
       ENDIF.
     ENDLOOP.
 
+    "First step & Many numbers
     result = REDUCE #( INIT r = 0 FOR wa IN result_tab NEXT
                        r = r + wa ).
   ENDMETHOD.

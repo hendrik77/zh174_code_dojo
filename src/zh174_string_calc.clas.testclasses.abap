@@ -17,6 +17,7 @@ CLASS ltcl_string_calc IMPLEMENTATION.
   METHOD setup.
     calc = NEW zh174_string_calc( ).
   ENDMETHOD.
+
   METHOD add_1_1.
     cl_abap_unit_assert=>assert_equals( msg = '1,1 = 2' exp = 2 act = calc->add( |1,1| ) ).
   ENDMETHOD.
@@ -33,8 +34,9 @@ CLASS ltcl_string_calc IMPLEMENTATION.
     TRY.
         calc->add( |1,2,| ).
       CATCH zcx_h174_str_calc INTO DATA(cx_str_calc).
-        DATA(error_msg) = cx_str_calc->get_text( ).
-        cl_abap_unit_assert=>assert_equals( msg = 'msg' exp = |Number expected but EOF found.| act = error_msg ).
+        cl_abap_unit_assert=>assert_equals( msg = 'msg'
+                                            exp = |Number expected but EOF found.|
+                                            act = cx_str_calc->get_text( ) ).
     ENDTRY.
 
   ENDMETHOD.
