@@ -1,0 +1,24 @@
+CLASS zh174_string_calc DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    METHODS add
+      IMPORTING
+        VALUE(number) TYPE string
+      RETURNING
+        VALUE(result) TYPE i.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zh174_string_calc IMPLEMENTATION.
+
+  METHOD add.
+
+  ENDMETHOD.
+
+ENDCLASS.
