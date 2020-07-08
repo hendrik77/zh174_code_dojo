@@ -4,15 +4,25 @@ CLASS zh174_roman DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
+    "! <p class="shorttext synchronized" lang="en">convert latin numbers to roman numerals</p>
+    "!
+    "! @parameter latin_number | <p class="shorttext synchronized" lang="en">latin number</p>
+    "! @parameter roman_number | <p class="shorttext synchronized" lang="en">roman numeral</p>
     METHODS to_roman
       IMPORTING
-        VALUE(latin_number) TYPE i
+        latin_number TYPE i
       RETURNING
         VALUE(roman_number) TYPE string.
+    "! <p class="shorttext synchronized" lang="en">Constructor - create translation table</p>
+    "! Roman Numerals to latin numbers translation table of the main numerals.
     METHODS constructor.
+    "! <p class="shorttext synchronized" lang="en">Convert roman numeral to latin number</p>
+    "!
+    "! @parameter roman_number | <p class="shorttext synchronized" lang="en">roman numeral</p>
+    "! @parameter latin_number | <p class="shorttext synchronized" lang="en">latin number</p>
     METHODS to_latin
       IMPORTING
-        VALUE(roman_number) TYPE string
+        roman_number TYPE string
       RETURNING
         VALUE(latin_number) TYPE i.
   PROTECTED SECTION.
@@ -42,7 +52,7 @@ CLASS zh174_roman IMPLEMENTATION.
 
   METHOD constructor.
     lookup_table = VALUE lookup_table_type( ( latin = 1000 roman = |M|  )
-                                            ( latin = 900  roman = |CM|  )
+                                            ( latin = 900  roman = |CM| )
                                             ( latin = 500  roman = |D|  )
                                             ( latin = 400  roman = |CD| )
                                             ( latin = 100  roman = |C|  )

@@ -12,6 +12,26 @@
     <UNICODE>X</UNICODE>
     <WITH_UNIT_TESTS>X</WITH_UNIT_TESTS>
    </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZH174_ROMAN</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Constructor - create translation table</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZH174_ROMAN</CLSNAME>
+     <CMPNAME>TO_LATIN</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Convert roman numeral to latin number</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZH174_ROMAN</CLSNAME>
+     <CMPNAME>TO_ROMAN</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>convert latin numbers to roman numerals</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
   </asx:values>
  </asx:abap>
 </abapGit>
