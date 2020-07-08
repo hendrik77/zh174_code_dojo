@@ -24,9 +24,9 @@ CLASS ltcl_roman_calc DEFINITION FINAL FOR TESTING
       setup,
       add_x_y_equals_z
         IMPORTING
-          VALUE(x) TYPE string
-          VALUE(y) TYPE string
-          VALUE(z) TYPE string.
+          x TYPE string
+          y TYPE string
+          z TYPE string.
 ENDCLASS.
 
 
