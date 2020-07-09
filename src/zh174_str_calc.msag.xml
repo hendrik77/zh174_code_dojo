@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZH174_STR_CALC</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>https://codingdojo.org/kata/StringCalculator/</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZH174_STR_CALC</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Number expected but EOF found.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZH174_STR_CALC</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>&apos;&amp;1&apos; expected but &apos;&amp;2&apos; found at position &amp;3</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>
