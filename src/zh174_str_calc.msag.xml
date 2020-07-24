@@ -20,6 +20,12 @@
      <MSGNR>002</MSGNR>
      <TEXT>&apos;&amp;1&apos; expected but &apos;&amp;2&apos; found at position &amp;3</TEXT>
     </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZH174_STR_CALC</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Negative not allowed : &amp;1</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

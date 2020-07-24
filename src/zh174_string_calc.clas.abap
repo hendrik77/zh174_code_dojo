@@ -20,6 +20,7 @@ ENDCLASS.
 CLASS zh174_string_calc IMPLEMENTATION.
 
   METHOD add.
+
     "Custom separators
     DATA(separator) = |,|. "default
     IF strlen( numbers ) > 2 AND substring( val = numbers len = 2 ) = '//'.
@@ -47,20 +48,31 @@ CLASS zh174_string_calc IMPLEMENTATION.
       ENDIF.
     ENDLOOP.
 
-    "First step & Many numbers
+*    Negative numbers
+*    DATA neg_numbers TYPE STANDARD TABLE OF i.
+    DATA neg_numbers TYPE string.
+*    Runtime Error <CONVT_NO_NUMBER> - strange because did not used to happen here but in the REDUCE - check on S4 onPrem
+    LOOP AT result_tab ASSIGNING FIELD-SYMBOL(<neg_number>) WHERE table_line < 0.
+      neg_numbers = neg_numbers && ', ' && <neg_number>.
+    ENDLOOP.
+    IF neg_numbers IS NOT INITIAL.
+      neg_numbers = substring( val = neg_numbers len = strlen( neg_numbers ) ).
+    ENDIF.
+
+    "First step & Many numbers & Custom separators
     TRY.
         result = REDUCE #( INIT r = 0 FOR wa IN result_tab NEXT
                            r = r + wa ).
       CATCH cx_sy_conversion_no_number INTO DATA(cx).
-        DATA(sep) = substring_from( val = cx->value regex = '\D+' ).
-        sep = substring_before( val = sep regex = '\d' ).
-*        DATA place TYPE i.
-        data(place) = find( val = numbers sub = sep ).
+        DATA(faulty_separator) = substring_from( val = cx->value regex = '\D+' ).
+        faulty_separator = substring_before( val = faulty_separator regex = '\d' ).
+
+        DATA(place) = find( val = numbers sub = faulty_separator ).
 
         RAISE EXCEPTION TYPE zcx_h174_str_calc
           MESSAGE ID zh174_str_calc
           NUMBER '002'
-          WITH separator sep place.
+          WITH separator faulty_separator place.
     ENDTRY.
   ENDMETHOD.
 

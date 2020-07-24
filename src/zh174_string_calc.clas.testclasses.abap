@@ -13,7 +13,8 @@ CLASS ltcl_string_calc DEFINITION FINAL FOR TESTING
       cust_sep_line FOR TESTING RAISING cx_static_check,
       cust_sep_sep FOR TESTING RAISING cx_static_check,
       cust_sep_err FOR TESTING RAISING cx_static_check,
-    cust_sep_err2 FOR TESTING RAISING cx_static_check,
+      cust_sep_err2 FOR TESTING RAISING cx_static_check,
+      neg_not_allowed FOR TESTING RAISING cx_static_check,
       setup.
 ENDCLASS.
 
@@ -62,20 +63,33 @@ CLASS ltcl_string_calc IMPLEMENTATION.
     TRY.
         calc->add( |//!\n1!2,3| ).
       CATCH zcx_h174_str_calc INTO DATA(cx_str_calc).
-        cl_abap_unit_assert=>assert_equals( msg = `"//!\n1!2,3" is invalid and should return the message "'|' expected but ',' found at position 3."`
-                                            exp =  `'!' expected but ',' found at position 3`
-                                            act = cx_str_calc->get_text( ) ).
+        DATA(act_msg) = cx_str_calc->get_text( ).
     ENDTRY.
+    cl_abap_unit_assert=>assert_equals( msg = `"//!\n1!2,3" is invalid and should return the message "'|' expected but ',' found at position 3."`
+                                        exp =  `'!' expected but ',' found at position 3`
+                                        act = act_msg ).
   ENDMETHOD.
 
   METHOD cust_sep_err2.
     TRY.
         calc->add( |//d\n1d2d3b3| ).
       CATCH zcx_h174_str_calc INTO DATA(cx_str_calc).
-        cl_abap_unit_assert=>assert_equals( msg = `d - b error at pos 5`
-                                            exp =  `'d' expected but 'b' found at position 5`
-                                            act = cx_str_calc->get_text( ) ).
+        DATA(act_msg) = cx_str_calc->get_text( ).
     ENDTRY.
+    cl_abap_unit_assert=>assert_equals( msg = `d - b error at pos 5`
+                                        exp =  `'d' expected but 'b' found at position 5`
+                                        act = act_msg ).
+  ENDMETHOD.
+  METHOD neg_not_allowed.
+    ""-1,2" is invalid and should return the message "Negative not allowed : -1"
+    TRY.
+        calc->add( |-1,2| ).
+      CATCH zcx_h174_str_calc INTO DATA(cx_str_calc).
+        DATA(act_msg) = cx_str_calc->get_text( ).
+    ENDTRY.
+    cl_abap_unit_assert=>assert_equals( msg = `"-1,2" is invalid and should return the message "Negative not allowed : -1"`
+                                        exp =  `Negative not allowed : -1`
+                                        act = act_msg ).
   ENDMETHOD.
 
 ENDCLASS.
