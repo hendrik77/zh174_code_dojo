@@ -12,6 +12,20 @@
     <UNICODE>X</UNICODE>
     <WITH_UNIT_TESTS>X</WITH_UNIT_TESTS>
    </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZBOWLING_GAME</CLSNAME>
+     <CMPNAME>CHECK_FRAME</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Check past frames for strike/spare -&gt; add pins from actual</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZBOWLING_GAME</CLSNAME>
+     <CMPNAME>GET_TOTAL_SCORE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Calculate total score of the game.</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
   </asx:values>
  </asx:abap>
 </abapGit>
