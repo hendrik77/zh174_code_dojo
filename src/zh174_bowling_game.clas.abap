@@ -86,7 +86,7 @@ CLASS zh174_bowling_game IMPLEMENTATION.
     IF frame_tab[ frame_to_check ]-throw_1 = x.
       "strike in check_frame -> add pins from next two throws
       frame_tab[ frame_to_check ]-score += pins_to_add.
-    ELSEIF frame_tab[ frame_to_check ]-score = 10 AND frame - frame_to_check = 1.
+    ELSEIF frame_tab[ frame_to_check ]-score = 10 AND ( frame - frame_to_check ) = 1.
       "spare in last frame -> add next throw
       frame_tab[ frame - 1 ]-score += pins_to_add.
     ENDIF.
