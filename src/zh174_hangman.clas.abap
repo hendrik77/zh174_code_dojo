@@ -27,12 +27,14 @@ ENDCLASS.
 CLASS zh174_hangman IMPLEMENTATION.
 
   METHOD guess.
-    DATA(offset) = find( val = word sub = letter ).
-    IF offset = letter_not_found.
-      result = state.
-    ELSE.
-      result = replace( val = state off = offset len = 1 with = letter ).
-    ENDIF.
+    DATA(offset) = 0.
+    DO count( val = word sub = letter ) TIMES.
+      offset = find( val = word sub = letter off = offset ).
+
+      state = replace( val = state off = offset len = 1 with = letter ).
+
+    ENDDO.
+    result = state.
   ENDMETHOD.
 
   METHOD get_word.
