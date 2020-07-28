@@ -1,20 +1,15 @@
 "! <p class="shorttext synchronized" lang="en">https://ccd-school.de/coding-dojo/</p>
 "! https://ccd-school.de/coding-dojo/class-katas/galgenmaennchen/
 "! https://www.codewars.com/kata/56832fb41676465e82000030
-CLASS zh174_hangman DEFINITION
+CLASS zh174_cl_hangman DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
 
   PUBLIC SECTION.
-
-    METHODS guess
-      IMPORTING
-        VALUE(letter) TYPE string
-      RETURNING
-        VALUE(result) TYPE string.
-
-    METHODS set_word IMPORTING word TYPE string.
+    INTERFACES zh174_if_hangman.
+    ALIASES guess FOR zh174_if_hangman~guess.
+    ALIASES set_word FOR zh174_if_hangman~set_word.
   PROTECTED SECTION.
   PRIVATE SECTION.
     CONSTANTS letter_not_found TYPE i VALUE -1.
@@ -22,12 +17,12 @@ CLASS zh174_hangman DEFINITION
     DATA state TYPE string.
     METHODS format
       IMPORTING
-        VALUE(word)   TYPE string
+        unformated_state      TYPE string
       RETURNING
-        VALUE(result) TYPE string.
+        VALUE(formated_state) TYPE string.
 ENDCLASS.
 
-CLASS zh174_hangman IMPLEMENTATION.
+CLASS zh174_cl_hangman IMPLEMENTATION.
 
   METHOD guess.
     DATA(offset) = 0.
@@ -35,6 +30,7 @@ CLASS zh174_hangman IMPLEMENTATION.
       offset = find( val = word sub = letter off = offset ).
       state = replace( val = state off = offset len = 1 with = letter ).
     ENDDO.
+
     result = format( state ).
   ENDMETHOD.
 
@@ -46,11 +42,12 @@ CLASS zh174_hangman IMPLEMENTATION.
 
 
   METHOD format.
-    result = COND #( WHEN strlen( word ) > 1
-                     THEN REDUCE #( INIT r = word
-                                    FOR j = 1 UNTIL j > strlen( result ) - 1
+    formated_state = COND #( WHEN strlen( unformated_state ) > 1
+                     THEN REDUCE #( INIT r = unformated_state "add space between all letters
+                                    FOR j = 1 UNTIL j > strlen( unformated_state ) - 1
                                     NEXT r = insert( val = r sub = ` ` off = j * 2 - 1 ) )
-                     ELSE word ).
+                     ELSE unformated_state ).
   ENDMETHOD.
+
 
 ENDCLASS.
