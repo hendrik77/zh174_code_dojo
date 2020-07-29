@@ -10,7 +10,8 @@ CLASS ltcl_hangman DEFINITION FINAL FOR TESTING
     guess_letter_from_word FOR TESTING RAISING cx_static_check,
     guess_s_word_yyy FOR TESTING RAISING cx_static_check,
     guess_y_word_yz FOR TESTING RAISING cx_static_check,
-    guess_z_word_yz FOR TESTING RAISING cx_static_check.
+    guess_z_word_yz FOR TESTING RAISING cx_static_check,
+    guess_2nd_letter FOR TESTING RAISING cx_static_check.
     METHODS setup.
 ENDCLASS.
 
@@ -19,7 +20,7 @@ CLASS ltcl_hangman IMPLEMENTATION.
 
   METHOD guess_y.
     hangman->set_word( 'y' ).
-    cl_abap_unit_assert=>assert_equals( msg = 'y -> y' exp = |y| act = hangman->guess( |y| ) ).
+    cl_abap_unit_assert=>assert_equals( msg = 'y -> y' exp = |You found the word! (y)| act = hangman->guess( |y| ) ).
   ENDMETHOD.
 
   METHOD guess_s_word_y.
@@ -45,6 +46,12 @@ CLASS ltcl_hangman IMPLEMENTATION.
   METHOD guess_letter_from_word.
     hangman->set_word( |sysko| ).
     cl_abap_unit_assert=>assert_equals( msg = 'guess y from sysko -> _ y _ _ _' exp = |_ y _ _ _| act = hangman->guess( |y| )  ) .
+  ENDMETHOD.
+
+  METHOD guess_2nd_letter.
+    hangman->set_word( |sysko| ).
+    hangman->guess( |y| ).
+    cl_abap_unit_assert=>assert_equals( msg = 'guess y,k from sysko' exp = |_ y _ k _| act = hangman->guess( |k| ) ).
   ENDMETHOD.
 
   METHOD setup.

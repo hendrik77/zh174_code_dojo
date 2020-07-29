@@ -31,7 +31,8 @@ CLASS zh174_cl_hangman IMPLEMENTATION.
       state = replace( val = state off = offset len = 1 with = letter ).
     ENDDO.
 
-    result = format( state ).
+    result = COND #( WHEN state = word THEN |You found the word! ({ word })|
+                     ELSE format( state ) ).
   ENDMETHOD.
 
 
