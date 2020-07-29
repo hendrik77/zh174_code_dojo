@@ -13,7 +13,8 @@ CLASS ltcl_hangman DEFINITION FINAL FOR TESTING
       guess_z_word_yz FOR TESTING RAISING cx_static_check,
       guess_2nd_letter FOR TESTING RAISING cx_static_check,
       game_has_ended FOR TESTING RAISING cx_static_check,
-      seven_misses_leads_to_hanging FOR TESTING RAISING cx_static_check.
+      seven_misses_leads_to_hanging FOR TESTING RAISING cx_static_check,
+    case_should_not_matter FOR TESTING RAISING cx_static_check.
     METHODS setup.
 ENDCLASS.
 
@@ -68,6 +69,11 @@ CLASS ltcl_hangman IMPLEMENTATION.
       hangman->guess( |y| ).
     ENDDO.
     cl_abap_unit_assert=>assert_equals( msg = 'hung' exp = |You got hung! The word was x.| act = hangman->guess( |y| ) ).
+  ENDMETHOD.
+
+  METHOD case_should_not_matter.
+    hangman->set_word( 'yz' ).
+    cl_abap_unit_assert=>assert_equals( msg = 'Y -> y _' exp = |y _| act = hangman->guess( |Y| ) ).
   ENDMETHOD.
 
   METHOD setup.

@@ -30,6 +30,7 @@ CLASS zh174_cl_hangman IMPLEMENTATION.
       result = |The game has ended.|.
       RETURN.
     ENDIF.
+    letter = to_lower( letter ).
     DATA(offset) = 0.
     DATA(count) = count( val = word sub = letter ).
     IF count <> 0.
