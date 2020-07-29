@@ -43,6 +43,7 @@ CLASS zh174_cl_hangman IMPLEMENTATION.
     ENDIF.
 
     result = COND #( WHEN state = word THEN |You found the word! ({ word })|
+                     when strlen( missed_letters ) > 6 + 3 then |You got hung! The word was { word }.|
                      ELSE format( state ) && missed_letters ).
   ENDMETHOD.
 
