@@ -15,6 +15,7 @@ CLASS zh174_cl_hangman DEFINITION
     CONSTANTS letter_not_found TYPE i VALUE -1.
     DATA word  TYPE string.
     DATA state TYPE string.
+    DATA missed_letters TYPE string.
     METHODS format
       IMPORTING
         unformated_state      TYPE string
@@ -25,14 +26,24 @@ ENDCLASS.
 CLASS zh174_cl_hangman IMPLEMENTATION.
 
   METHOD guess.
+    IF state = word.
+      result = |The game has ended.|.
+      RETURN.
+    ENDIF.
     DATA(offset) = 0.
-    DO count( val = word sub = letter ) TIMES.
-      offset = find( val = word sub = letter off = offset ).
-      state = replace( val = state off = offset len = 1 with = letter ).
-    ENDDO.
+    DATA(count) = count( val = word sub = letter ).
+    IF count <> 0.
+      DO count TIMES.
+        offset = find( val = word sub = letter off = offset ).
+        state = replace( val = state off = offset len = 1 with = letter ).
+      ENDDO.
+    ELSE.
+      missed_letters = COND #( WHEN missed_letters IS INITIAL THEN  ` # ` ELSE missed_letters )
+                       && CONV string( letter ).
+    ENDIF.
 
     result = COND #( WHEN state = word THEN |You found the word! ({ word })|
-                     ELSE format( state ) ).
+                     ELSE format( state ) && missed_letters ).
   ENDMETHOD.
 
 
