@@ -1,0 +1,25 @@
+CLASS zh174_cl_calc DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    METHODS add
+      IMPORTING
+        num1       TYPE i
+        num2       TYPE i
+      RETURNING
+        VALUE(sum) TYPE i.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zh174_cl_calc IMPLEMENTATION.
+
+  METHOD add.
+    sum = num1 + num2.
+  ENDMETHOD.
+
+ENDCLASS.
