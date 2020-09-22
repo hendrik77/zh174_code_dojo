@@ -15,6 +15,8 @@ CLASS ltcl_leap_year IMPLEMENTATION.
 
   METHOD devisible_by_4.
     cl_abap_unit_assert=>assert_true( msg = '4 is devisible by 4' act = leap_year->check( 4 ) ).
+    cl_abap_unit_assert=>assert_true( msg = '8 is devisible by 4' act = leap_year->check( 8 ) ).
+    cl_abap_unit_assert=>assert_true( msg = '1996 is devisible by 4' act = leap_year->check( 1996 ) ).
   ENDMETHOD.
 
   METHOD not_devisible_by_4.

@@ -6,7 +6,7 @@ CLASS zh174_leap_year DEFINITION
   PUBLIC SECTION.
     METHODS check
       IMPORTING
-        number        TYPE i
+        year          TYPE i
       RETURNING
         VALUE(result) TYPE abap_bool.
   PROTECTED SECTION.
@@ -18,7 +18,7 @@ ENDCLASS.
 CLASS zh174_leap_year IMPLEMENTATION.
 
   METHOD check.
-    IF number = 4.
+    IF year MOD 4  = 0.
       result = abap_true.
     ELSE.
       result = abap_false.
