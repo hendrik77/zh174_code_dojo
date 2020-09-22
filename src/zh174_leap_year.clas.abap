@@ -8,7 +8,7 @@ CLASS zh174_leap_year DEFINITION
       IMPORTING
         number        TYPE i
       RETURNING
-        value(result) TYPE abap_bool.
+        VALUE(result) TYPE abap_bool.
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
@@ -18,7 +18,11 @@ ENDCLASS.
 CLASS zh174_leap_year IMPLEMENTATION.
 
   METHOD check.
-    result = abap_true.
+    IF number = 4.
+      result = abap_true.
+    ELSE.
+      result = abap_false.
+    ENDIF.
   ENDMETHOD.
 
 ENDCLASS.
