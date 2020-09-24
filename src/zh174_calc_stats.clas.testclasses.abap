@@ -11,7 +11,7 @@ CLASS ltcl_stats_calc DEFINITION FINAL FOR TESTING
       maximum_value_92 FOR TESTING RAISING cx_static_check,
       average_value FOR TESTING RAISING cx_static_check,
       print_statistics FOR TESTING RAISING cx_static_check,
-    average_value_2 FOR TESTING RAISING cx_static_check.
+      average_value_2 FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
