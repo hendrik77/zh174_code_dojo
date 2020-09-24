@@ -31,7 +31,6 @@ ENDCLASS.
 CLASS zh174_calc_stats IMPLEMENTATION.
 
   METHOD constructor.
-    "remove blanks and split at comma into internal table
     SPLIT sequence_string AT |,| INTO TABLE sequence.
   ENDMETHOD.
 
@@ -56,7 +55,6 @@ CLASS zh174_calc_stats IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD get_average_value.
-
     DATA(sum) = REDUCE i( INIT i = 0
                           FOR n IN sequence
                           NEXT i = i + n ).
