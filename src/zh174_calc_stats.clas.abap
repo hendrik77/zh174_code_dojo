@@ -15,7 +15,10 @@ CLASS zh174_calc_stats DEFINITION
         VALUE(minimum_value) TYPE i.
     METHODS get_maximum_value
       RETURNING
-        value(maximum_value) TYPE i.
+        VALUE(maximum_value) TYPE i.
+    METHODS get_average_value
+      RETURNING
+        VALUE(average) TYPE string.
   PROTECTED SECTION.
   PRIVATE SECTION.
     DATA sequence TYPE string_table.
@@ -49,6 +52,15 @@ CLASS zh174_calc_stats IMPLEMENTATION.
                               NEXT max = COND #( WHEN max > CONV i( number )
                                                  THEN max
                                                  ELSE CONV i( number ) ) ).
+  ENDMETHOD.
+
+
+  METHOD get_average_value.
+
+    DATA(sum) = REDUCE i( INIT i = 0
+                          FOR n IN sequence
+                          NEXT i = i + n ).
+    average = round( val = sum / lines( sequence ) dec = 6 ).
   ENDMETHOD.
 
 ENDCLASS.

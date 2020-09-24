@@ -8,7 +8,8 @@ CLASS ltcl_stats_calc DEFINITION FINAL FOR TESTING
       verify_sequence_length_eq_4 FOR TESTING RAISING cx_static_check,
       minimum_value_minus_2 FOR TESTING RAISING cx_static_check,
       minmum_value_6 FOR TESTING RAISING cx_static_check,
-      maximum_value_92 FOR TESTING RAISING cx_static_check.
+      maximum_value_92 FOR TESTING RAISING cx_static_check,
+      average_value FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -54,5 +55,12 @@ CLASS ltcl_stats_calc IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals( msg = 'maximum value = 92' exp = 92 act = maximum_value ).
   ENDMETHOD.
 
+  METHOD average_value.
+    DATA(stats) = NEW zh174_calc_stats( sequence_string = |6, 9, 15, -2, 92, 11| ).
+
+    DATA(average_value) = stats->get_average_value( ).
+
+    cl_abap_unit_assert=>assert_equals( msg = 'avverage value = 21.833333' exp = '21.833333' act = average_value ).
+  ENDMETHOD.
 
 ENDCLASS.
