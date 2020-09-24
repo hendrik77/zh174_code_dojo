@@ -10,7 +10,7 @@ CLASS ltcl_stats_calc DEFINITION FINAL FOR TESTING
       minmum_value_6 FOR TESTING RAISING cx_static_check,
       maximum_value_92 FOR TESTING RAISING cx_static_check,
       average_value FOR TESTING RAISING cx_static_check,
-      name FOR TESTING RAISING cx_static_check.
+      print_statistics FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -64,7 +64,7 @@ CLASS ltcl_stats_calc IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals( msg = 'avverage value = 21.833333' exp = '21.833333' act = average_value ).
   ENDMETHOD.
 
-  METHOD name.
+  METHOD print_statistics.
     DATA(stats) = NEW zh174_calc_stats( |6, 9, 15, -2, 92, 11| ).
 
     DATA(stats_string) = stats->process( ).

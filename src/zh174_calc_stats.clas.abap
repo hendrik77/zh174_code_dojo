@@ -39,7 +39,6 @@ CLASS zh174_calc_stats IMPLEMENTATION.
     number = lines( sequence ).
   ENDMETHOD.
 
-
   METHOD get_minimum_value.
     minimum_value = REDUCE #( INIT min = CONV i( sequence[ 1 ] )
                               FOR number IN sequence FROM 2
@@ -47,7 +46,6 @@ CLASS zh174_calc_stats IMPLEMENTATION.
                                                  THEN min
                                                  ELSE CONV i( number ) ) ).
   ENDMETHOD.
-
 
   METHOD get_maximum_value.
     maximum_value = REDUCE #( INIT max = CONV i( sequence[ 1 ] )
@@ -57,7 +55,6 @@ CLASS zh174_calc_stats IMPLEMENTATION.
                                                  ELSE CONV i( number ) ) ).
   ENDMETHOD.
 
-
   METHOD get_average_value.
 
     DATA(sum) = REDUCE i( INIT i = 0
@@ -65,7 +62,6 @@ CLASS zh174_calc_stats IMPLEMENTATION.
                           NEXT i = i + n ).
     average = round( val = sum / lines( sequence ) dec = 6 ).
   ENDMETHOD.
-
 
   METHOD process.
     statistics =
