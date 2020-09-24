@@ -19,6 +19,9 @@ CLASS zh174_calc_stats DEFINITION
     METHODS get_average_value
       RETURNING
         VALUE(average) TYPE string.
+    METHODS process
+      RETURNING
+        VALUE(statistics) TYPE string.
   PROTECTED SECTION.
   PRIVATE SECTION.
     DATA sequence TYPE string_table.
@@ -61,6 +64,15 @@ CLASS zh174_calc_stats IMPLEMENTATION.
                           FOR n IN sequence
                           NEXT i = i + n ).
     average = round( val = sum / lines( sequence ) dec = 6 ).
+  ENDMETHOD.
+
+
+  METHOD process.
+    statistics =
+      |o) minimum value = { get_minimum_value( ) }\n| &&
+      |o) maximum value = { get_maximum_value( ) }\n| &&
+      |o) number of elements in the sequence = { get_number_of_elements( ) }\n| &&
+      |o) average value = { get_average_value( ) }|.
   ENDMETHOD.
 
 ENDCLASS.

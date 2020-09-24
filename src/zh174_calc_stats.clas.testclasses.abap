@@ -10,7 +10,7 @@ CLASS ltcl_stats_calc DEFINITION FINAL FOR TESTING
       minmum_value_6 FOR TESTING RAISING cx_static_check,
       maximum_value_92 FOR TESTING RAISING cx_static_check,
       average_value FOR TESTING RAISING cx_static_check,
-    name FOR TESTING RAISING cx_static_check.
+      name FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -65,13 +65,14 @@ CLASS ltcl_stats_calc IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD name.
-    DATA: expected_stats_string TYPE string,
-          stats_string TYPE string.
+    DATA(stats) = NEW zh174_calc_stats( |6, 9, 15, -2, 92, 11| ).
 
-    expected_stats_string = |o) minimum value = -2\n| &&
-                            |o) maximum vlaue = 92\n| &&
-                            |o) number of elements in the sequence = 6\n| &&
-                            |o) average value = 21.833333|.
+    DATA(stats_string) = stats->process( ).
+
+    DATA(expected_stats_string) = |o) minimum value = -2\n| &&
+                                  |o) maximum value = 92\n| &&
+                                  |o) number of elements in the sequence = 6\n| &&
+                                  |o) average value = 21.833333|.
     cl_abap_unit_assert=>assert_equals( msg = 'print stats for sequence' exp = expected_stats_string act = stats_string ).
   ENDMETHOD.
 
