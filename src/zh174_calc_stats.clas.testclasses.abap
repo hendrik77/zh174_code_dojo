@@ -9,7 +9,8 @@ CLASS ltcl_stats_calc DEFINITION FINAL FOR TESTING
       minimum_value_minus_2 FOR TESTING RAISING cx_static_check,
       minmum_value_6 FOR TESTING RAISING cx_static_check,
       maximum_value_92 FOR TESTING RAISING cx_static_check,
-      average_value FOR TESTING RAISING cx_static_check.
+      average_value FOR TESTING RAISING cx_static_check,
+    name FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -61,6 +62,17 @@ CLASS ltcl_stats_calc IMPLEMENTATION.
     DATA(average_value) = stats->get_average_value( ).
 
     cl_abap_unit_assert=>assert_equals( msg = 'avverage value = 21.833333' exp = '21.833333' act = average_value ).
+  ENDMETHOD.
+
+  METHOD name.
+    DATA: expected_stats_string TYPE string,
+          stats_string TYPE string.
+
+    expected_stats_string = |o) minimum value = -2\n| &&
+                            |o) maximum vlaue = 92\n| &&
+                            |o) number of elements in the sequence = 6\n| &&
+                            |o) average value = 21.833333|.
+    cl_abap_unit_assert=>assert_equals( msg = 'print stats for sequence' exp = expected_stats_string act = stats_string ).
   ENDMETHOD.
 
 ENDCLASS.
