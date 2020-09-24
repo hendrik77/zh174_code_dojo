@@ -12,16 +12,21 @@ CLASS zh174_calc_stats DEFINITION
         VALUE(number) TYPE i.
     METHODS get_minimum_value
       RETURNING
-        value(minimum_value) TYPE i.
+        VALUE(minimum_value) TYPE i.
+    METHODS get_maximum_value
+      RETURNING
+        value(maximum_value) TYPE i.
   PROTECTED SECTION.
   PRIVATE SECTION.
     DATA sequence TYPE string_table.
+
 ENDCLASS.
 
 CLASS zh174_calc_stats IMPLEMENTATION.
 
   METHOD constructor.
-    SPLIT sequence_string AT |,| INTO TABLE me->sequence.
+    "remove blanks and split at comma into internal table
+    SPLIT sequence_string AT |,| INTO TABLE sequence.
   ENDMETHOD.
 
   METHOD get_number_of_elements.
@@ -30,7 +35,20 @@ CLASS zh174_calc_stats IMPLEMENTATION.
 
 
   METHOD get_minimum_value.
+    minimum_value = REDUCE #( INIT min = CONV i( sequence[ 1 ] )
+                              FOR number IN sequence FROM 2
+                              NEXT min = COND #( WHEN min < CONV i( number )
+                                                 THEN min
+                                                 ELSE CONV i( number ) ) ).
+  ENDMETHOD.
 
+
+  METHOD get_maximum_value.
+    maximum_value = REDUCE #( INIT max = CONV i( sequence[ 1 ] )
+                              FOR number IN sequence FROM 2
+                              NEXT max = COND #( WHEN max > CONV i( number )
+                                                 THEN max
+                                                 ELSE CONV i( number ) ) ).
   ENDMETHOD.
 
 ENDCLASS.
