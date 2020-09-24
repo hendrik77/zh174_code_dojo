@@ -5,7 +5,8 @@ CLASS ltcl_stats_calc DEFINITION FINAL FOR TESTING
   PRIVATE SECTION.
     METHODS:
       verify_sequence_elements FOR TESTING RAISING cx_static_check,
-      verify_sequence_length_eq_4 FOR TESTING RAISING cx_static_check.
+      verify_sequence_length_eq_4 FOR TESTING RAISING cx_static_check,
+      test FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -25,6 +26,14 @@ CLASS ltcl_stats_calc IMPLEMENTATION.
     DATA(number_of_elements) = stats->get_number_of_elements( ).
 
     cl_abap_unit_assert=>assert_equals( msg = 'number of elements in seqence = 4' exp = 4 act = number_of_elements ).
+  ENDMETHOD.
+
+  METHOD test.
+    DATA(stats) = NEW zh174_calc_stats( sequence_string = |6, 9, 15, -2, 92, 11| ).
+
+    DATA(minmum_value) = stats->get_minimum_value( ).
+
+    cl_abap_unit_assert=>assert_equals( msg = 'minimum value = -2' exp = -2 act = minmum_value ).
   ENDMETHOD.
 
 ENDCLASS.

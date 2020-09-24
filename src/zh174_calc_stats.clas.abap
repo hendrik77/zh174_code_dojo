@@ -10,6 +10,9 @@ CLASS zh174_calc_stats DEFINITION
     METHODS get_number_of_elements
       RETURNING
         VALUE(number) TYPE i.
+    METHODS get_minimum_value
+      RETURNING
+        value(minimum_value) TYPE i.
   PROTECTED SECTION.
   PRIVATE SECTION.
     DATA sequence TYPE string_table.
@@ -23,6 +26,11 @@ CLASS zh174_calc_stats IMPLEMENTATION.
 
   METHOD get_number_of_elements.
     number = lines( sequence ).
+  ENDMETHOD.
+
+
+  METHOD get_minimum_value.
+
   ENDMETHOD.
 
 ENDCLASS.
