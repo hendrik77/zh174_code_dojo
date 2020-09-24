@@ -8,7 +8,7 @@ CLASS ltcl_leap_year DEFINITION FINAL FOR TESTING
       typical_leap_year FOR TESTING RAISING cx_static_check,
       common_year FOR TESTING RAISING cx_static_check,
       atypical_common_year FOR TESTING RAISING cx_static_check,
-    atypical_leyp_year FOR TESTING RAISING cx_static_check,
+      atypical_leap_year FOR TESTING RAISING cx_static_check,
       setup.
 ENDCLASS.
 
@@ -30,14 +30,12 @@ CLASS ltcl_leap_year IMPLEMENTATION.
     cl_abap_unit_assert=>assert_false( msg = '1900 is an atypical common year' act = leap_year->check( 1900 ) ).
   ENDMETHOD.
 
-  METHOD atypical_leyp_year.
+  METHOD atypical_leap_year.
     cl_abap_unit_assert=>assert_true( msg = '2000 is an atypical leap year' act = leap_year->check( 2000 ) ).
   ENDMETHOD.
 
   METHOD setup.
-
     leap_year = NEW #( ).
-
   ENDMETHOD.
 
 ENDCLASS.
