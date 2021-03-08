@@ -8,6 +8,8 @@ ABAP katas solved TDD way. Some better, some not so much ;-) Idea: You can follo
 * Roman Calculator - https://codingdojo.org/kata/RomanCalculator/ 
 * Bowling - https://ccd-school.de/coding-dojo/class-katas/bowling/ 
 * Hangman - following https://www.codewars.com/kata/56832fb41676465e82000030 instructions with a minor tweak... (setter instead of constructor)
+* Fibonacci 
+* Leap Year
 
 ## Katas in progress
 * String Calculator - https://codingdojo.org/kata/StringCalculator/ 
